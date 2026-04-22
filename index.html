@@ -23,12 +23,25 @@
         <h1 class="site-title">Smart Routine &amp; Product Advisor</h1>
       </header>
 
-      <!-- Category Filter -->
-      <div class="search-section">
-        <select id="categoryFilter">
-          <option value="" disabled selected>Choose a Category</option>
+      <!-- Filters -->
+      <section class="controls-section" aria-label="Product filters and layout controls">
+        <div class="search-section">
+          <label for="productSearch" class="visually-hidden">Search products</label>
+          <input
+            id="productSearch"
+            type="search"
+            placeholder="Search by product, brand, or keyword"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="filter-row">
+          <label for="categoryFilter" class="visually-hidden">Filter by category</label>
+          <select id="categoryFilter">
+            <option value="">All Categories</option>
           <option value="cleanser">Cleansers</option>
           <option value="moisturizer">Moisturizers & Treatments</option>
+          <option value="skincare">Skincare</option>
           <option value="haircare">Haircare</option>
           <option value="makeup">Makeup</option>
           <option value="hair color">Hair Color</option>
@@ -36,15 +49,23 @@
           <option value="men's grooming">Men's Grooming</option>
           <option value="suncare">Suncare</option>
           <option value="fragrance">Fragrance</option>
-        </select>
-      </div>
+          </select>
+
+          <button id="rtlToggle" class="ghost-btn" type="button" aria-pressed="false">
+            RTL Mode
+          </button>
+        </div>
+      </section>
 
       <!-- Products Grid -->
       <div id="productsContainer" class="products-grid"></div>
 
       <!-- Selected Products -->
       <div class="selected-products">
-        <h2>Selected Products</h2>
+        <div class="selected-products-header">
+          <h2>Selected Products</h2>
+          <button id="clearSelectedBtn" class="ghost-btn" type="button">Clear All</button>
+        </div>
         <div id="selectedProductsList"></div>
         <button id="generateRoutine" class="generate-btn">
           <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Routine
@@ -85,8 +106,22 @@
       </footer>
     </div>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
+    <dialog id="descriptionModal" class="description-modal" aria-labelledby="modalProductName">
+      <div class="description-modal-content">
+        <button
+          id="closeDescriptionModal"
+          class="modal-close-btn"
+          type="button"
+          aria-label="Close product details"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <p id="modalProductBrand" class="modal-brand"></p>
+        <h3 id="modalProductName"></h3>
+        <p id="modalProductDescription"></p>
+      </div>
+    </dialog>
+
     <script src="script.js"></script>
   </body>
 </html>
